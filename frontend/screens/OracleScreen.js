@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,17 +9,17 @@ import {
   StyleSheet,
   Alert,
   ImageBackground,
-} from "react-native";
-import { getOracleInsights } from "../services/api";
+} from 'react-native';
+import { getOracleInsights } from '../services/api';
 
 export default function OracleScreen() {
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
   const handleSubmit = async () => {
     if (!prompt.trim()) {
-      Alert.alert("Error", "Please enter a prompt");
+      Alert.alert('Error', 'Please enter a prompt');
       return;
     }
     setLoading(true);
@@ -27,7 +27,7 @@ export default function OracleScreen() {
       const res = await getOracleInsights(prompt);
       setResult(res);
     } catch (err) {
-      Alert.alert("Error", err.message);
+      Alert.alert('Error', err.message);
     } finally {
       setLoading(false);
     }
@@ -35,38 +35,36 @@ export default function OracleScreen() {
 
   return (
     <ImageBackground
-      source={require("../assets/gate.jpg")}
+      source={require('../assets/gate.jpg')}
       style={styles.background}
       resizeMode="cover"
     >
-      <View style={styles.overlay}>
-        <ScrollView contentContainerStyle={styles.container}>
-          <Text style={styles.title}>🌿 Grove Oracle</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Ask the oracle..."
-            placeholderTextColor="#aaa"
-            multiline
-            value={prompt}
-            onChangeText={setPrompt}
-          />
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            {loading ? (
-              <ActivityIndicator size="small" color="#fff" />
-            ) : (
-              <Text style={styles.buttonText}>Get Insights</Text>
-            )}
-          </TouchableOpacity>
-
-          {result && (
-            <View style={styles.resultContainer}>
-              <Text style={styles.resultText}>
-                {JSON.stringify(result, null, 2)}
-              </Text>
-            </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}> 🌿💫🌳 Grove Oracle 🌳💫🌿</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Ask the oracle..."
+          placeholderTextColor="#aaa"
+          multiline
+          value={prompt}
+          onChangeText={setPrompt}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Get Insights</Text>
           )}
-        </ScrollView>
-      </View>
+        </TouchableOpacity>
+
+        {result && (
+          <View style={styles.resultContainer}>
+            <Text style={styles.resultText}>
+              {JSON.stringify(result, null, 2)}
+            </Text>
+          </View>
+        )}
+      </ScrollView>
     </ImageBackground>
   );
 }
@@ -75,47 +73,44 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
   },
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
-  },
   container: {
     flexGrow: 1,
+    backgroundColor: 'rgba(30, 30, 46, 0.8)',
     padding: 20,
   },
   title: {
     fontSize: 24,
-    color: "#e0c0ff",
+    color: '#e0c0ff',
     marginBottom: 20,
-    textAlign: "center",
+    textAlign: 'center',
   },
   input: {
-    backgroundColor: "rgba(46, 46, 62, 0.9)",
-    color: "#fff",
+    backgroundColor: '#2e2e3e',
+    color: '#fff',
     padding: 12,
     borderRadius: 8,
     marginBottom: 12,
     height: 100,
-    textAlignVertical: "top",
+    textAlignVertical: 'top',
   },
   button: {
-    backgroundColor: "#8e44ad",
+    backgroundColor: '#8e44ad',
     padding: 14,
     borderRadius: 8,
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 20,
   },
   buttonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
   },
   resultContainer: {
-    backgroundColor: "rgba(46, 46, 62, 0.9)",
+    backgroundColor: '#2e2e3e',
     padding: 12,
     borderRadius: 8,
   },
   resultText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 14,
   },
 });
