@@ -1,0 +1,98 @@
+# ───────────── LaunchPad: General ─────────────
+
+# Ignore any “launchpad”-specific IDE or local environment files:
+backend/launchpad/.replit
+backend/launchpad/*.env
+frontend/launchpad/.env
+frontend/launchpad/*.local
+
+# ───────────── Python: LaunchPad Backend ─────────────
+
+# Byte-compiled / optimized / DLL files
+backend/launchpad/__pycache__/
+backend/launchpad/*.py[cod]
+backend/launchpad/*$py.class
+
+# If you ever use a virtualenv inside launchpad/
+backend/launchpad/venv/
+backend/launchpad/env/
+backend/launchpad/ENV/
+backend/launchpad/*.venv/
+
+# Flask instance folder (if created)
+backend/launchpad/instance/
+
+# Migrations (only if generated locally and you don’t want to commit)
+backend/launchpad/migrations/
+
+# Logs and databases
+backend/launchpad/*.log
+backend/launchpad/*.sqlite3
+backend/launchpad/*.db
+
+# ───────────── Node/React/Expo: LaunchPad Frontend ─────────────
+
+# Node modules (never commit these)
+frontend/launchpad/node_modules/
+
+# Expo caches and build outputs
+frontend/launchpad/.expo/
+frontend/launchpad/.expo-shared/
+frontend/launchpad/web-build/
+frontend/launchpad/dist/
+frontend/launchpad/build/
+
+# Metro bundler cache
+frontend/launchpad/.expo/metro-cache/
+
+# Yarn / npm log files
+frontend/launchpad/yarn-error.log*
+frontend/launchpad/yarn-debug.log*
+frontend/launchpad/npm-debug.log*
+frontend/launchpad/package-lock.json  # if you prefer Yarn
+frontend/launchpad/yarn.lock          # if you prefer npm
+
+# React Native packager
+frontend/launchpad/ios/Pods/
+frontend/launchpad/android/app/build/
+frontend/launchpad/android/build/
+
+# Xcode / Android Studio
+frontend/launchpad/ios/DerivedData/
+frontend/launchpad/android/.gradle/
+frontend/launchpad/android/local.properties
+
+# Expo’s temporary directories
+frontend/launchpad/.expo/cache/
+frontend/launchpad/.expo/browser/
+frontend/launchpad/.expo/splash/
+frontend/launchpad/.expo/photon/
+
+# Miscellaneous
+frontend/launchpad/*.log
+frontend/launchpad/*.keystore
+frontend/launchpad/*.jks
+frontend/launchpad/.env.local
+
+# ───────────── Miscellaneous / OS Files ─────────────
+
+# macOS
+*.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# All editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Temporary files
+*~
+*.swp
+.ipynb_checkpoints/
