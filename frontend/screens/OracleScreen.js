@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,26 +8,26 @@ import {
   ActivityIndicator,
   StyleSheet,
   Alert,
-  ImageBackground,
-} from 'react-native';
-import { getOracleInsights } from '../services/api';
+  ImageBackground
+} from "react-native";
+import { getOracleInsights } from "../services/api";
 
 export default function OracleScreen() {
-  const [prompt, setPrompt] = useState('');
+  const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<string | null>(null);
 
   const handleSubmit = async () => {
     if (!prompt.trim()) {
-      Alert.alert('Error', 'Please enter a prompt');
+      Alert.alert("Error", "Please enter a prompt");
       return;
     }
     setLoading(true);
     try {
-      const res = await getOracleInsights(prompt);
-      setResult(res);
-    } catch (err) {
-      Alert.alert('Error', err.message);
+      const answer = await getOracleInsights(prompt);
+      setResult(answer);
+    } catch (err: any) {
+      Alert.alert("Error", err.message);
     } finally {
       setLoading(false);
     }
@@ -35,7 +35,7 @@ export default function OracleScreen() {
 
   return (
     <ImageBackground
-      source={require('../assets/gate.jpg')}
+      source={require("../assets/images/gate.png")}
       style={styles.background}
       resizeMode="cover"
     >
@@ -59,9 +59,7 @@ export default function OracleScreen() {
 
         {result && (
           <View style={styles.resultContainer}>
-            <Text style={styles.resultText}>
-              {JSON.stringify(result, null, 2)}
-            </Text>
+            <Text style={styles.resultText}>{result}</Text>
           </View>
         )}
       </ScrollView>
@@ -70,47 +68,39 @@ export default function OracleScreen() {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
+  background: { flex: 1 },
   container: {
     flexGrow: 1,
-    backgroundColor: 'rgba(30, 30, 46, 0.8)',
-    padding: 20,
+    backgroundColor: "rgba(30, 30, 46, 0.8)",
+    padding: 20
   },
   title: {
     fontSize: 24,
-    color: '#e0c0ff',
+    color: "#e0c0ff",
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center"
   },
   input: {
-    backgroundColor: '#2e2e3e',
-    color: '#fff',
+    backgroundColor: "#2e2e3e",
+    color: "#fff",
     padding: 12,
     borderRadius: 8,
     marginBottom: 12,
     height: 100,
-    textAlignVertical: 'top',
+    textAlignVertical: "top"
   },
   button: {
-    backgroundColor: '#8e44ad',
+    backgroundColor: "#8e44ad",
     padding: 14,
     borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 20,
+    alignItems: "center",
+    marginBottom: 20
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
+  buttonText: { color: "#fff", fontSize: 16 },
   resultContainer: {
-    backgroundColor: '#2e2e3e',
+    backgroundColor: "#2e2e3e",
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 8
   },
-  resultText: {
-    color: '#fff',
-    fontSize: 14,
-  },
+  resultText: { color: "#fff", fontSize: 14 }
 });
