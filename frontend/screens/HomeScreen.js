@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-// Background image: place icon.png under frontend/assets/images/icon.png
 export default function HomeScreen() {
   const navigation = useNavigation();
 
@@ -30,7 +29,7 @@ export default function HomeScreen() {
           style={styles.button}
           onPress={() => navigation.navigate("Vault")}
         >
-          <Text style={styles.buttonText}>🏺 Vault of Awackaning </Text>
+          <Text style={styles.buttonText}>🏺 Memory Vault</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
