@@ -4,137 +4,89 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ActivityIndicator,
   StyleSheet,
   Alert,
   ImageBackground,
+  ScrollView
 } from "react-native";
-import { uploadMemory, downloadMemory } from "../services/api";
+import { uploadMemory, downloadMemories } from "../services/api";
 
-export default function VaultScreen({ navigation }) {
+export default function VaultScreen({ navigation }: any) {
   const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [downloaded, setDownloaded] = useState("");
 
   const handleUpload = async () => {
-    if (!content.trim()) {
-      Alert.alert("Error", "Please write something to upload");
-      return;
-    }
-    setLoading(true);
     try {
-      await uploadMemory(content);
-      Alert.alert("Success", "Memory uploaded");
-    } catch (err) {
-      Alert.alert("Error", err.message);
-    } finally {
-      setLoading(false);
+      // For demo, hardcode userId = 1
+      await uploadMemory(1, content);
+      Alert.alert("Success", "Memory uploaded!");
+      setContent("");
+    } catch (err: any) {
+      Alert.alert("Upload Error", err.message);
     }
   };
 
   const handleDownload = async () => {
-    setLoading(true);
     try {
-      const res = await downloadMemory(1); // example: ID 1
-      if (res.content) {
-        setDownloaded(res.content);
-      } else {
-        Alert.alert("Error", res.msg || "Download failed");
-      }
-    } catch (err) {
-      Alert.alert("Error", err.message);
-    } finally {
-      setLoading(false);
+      const memories = await downloadMemories(1);
+      Alert.alert("Downloaded Memories", JSON.stringify(memories));
+    } catch (err: any) {
+      Alert.alert("Download Error", err.message);
     }
   };
 
   return (
     <ImageBackground
-      source={require("../assets/favicon.jpg")}
+      source={require("../assets/images/splash.png")}
       style={styles.background}
       resizeMode="cover"
     >
-      <View style={styles.overlay}>
-        <View style={styles.container}>
-          <Text style={styles.title}>🔐 Vault</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Write a memory..."
-            placeholderTextColor="#aaa"
-            multiline
-            value={content}
-            onChangeText={setContent}
-          />
-          <TouchableOpacity style={styles.button} onPress={handleUpload}>
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.buttonText}>Upload Memory</Text>
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleDownload}>
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.buttonText}>Download Memory #1</Text>
-            )}
-          </TouchableOpacity>
-          {downloaded ? (
-            <View style={styles.resultContainer}>
-              <Text style={styles.resultText}>{downloaded}</Text>
-            </View>
-          ) : null}
-        </View>
-      </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>🏺 Memory Vault</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Write your memory here..."
+          placeholderTextColor="#aaa"
+          multiline
+          value={content}
+          onChangeText={setContent}
+        />
+        <TouchableOpacity style={styles.button} onPress={handleUpload}>
+          <Text style={styles.buttonText}>Upload Memory</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleDownload}>
+          <Text style={styles.buttonText}>Download Memory</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
-  },
+  background: { flex: 1 },
   container: {
-    flex: 1,
+    flexGrow: 1,
+    backgroundColor: "rgba(30, 30, 46, 0.8)",
     padding: 20,
+    alignItems: "center"
   },
-  title: {
-    fontSize: 24,
-    color: "#e0c0ff",
-    marginBottom: 20,
-    textAlign: "center",
-  },
+  title: { fontSize: 24, color: "#e0c0ff", marginBottom: 20 },
   input: {
-    backgroundColor: "rgba(46, 46, 62, 0.9)",
+    width: "100%",
+    backgroundColor: "#2e2e3e",
     color: "#fff",
     padding: 12,
     borderRadius: 8,
     marginBottom: 12,
-    height: 100,
-    textAlignVertical: "top",
+    minHeight: 120,
+    textAlignVertical: "top"
   },
   button: {
     backgroundColor: "#8e44ad",
     padding: 14,
     borderRadius: 8,
-    alignItems: "center",
-    marginBottom: 20,
+    marginVertical: 10,
+    width: "100%",
+    alignItems: "center"
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-  },
-  resultContainer: {
-    backgroundColor: "rgba(46, 46, 62, 0.9)",
-    padding: 12,
-    borderRadius: 8,
-  },
-  resultText: {
-    color: "#fff",
-    fontSize: 14,
-  },
+  buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold" }
 });
