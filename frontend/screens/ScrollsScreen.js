@@ -1,69 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  StyleSheet,
-  TouchableOpacity,
-  ImageBackground,
-} from 'react-native';
-import { fetchScrolls } from '../services/api';
+import React from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 
-export default function ScrollsScreen({ navigation }) {
-  const [scrolls, setScrolls] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadScrolls = async () => {
-      try {
-        const res = await fetchScrolls();
-        setScrolls(res);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadScrolls();
-  }, []);
-
-  if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color="#8e44ad" />
-      </View>
-    );
-  }
-
+export default function ScrollsScreen() {
   return (
-    <ImageBackground
-      source={require('../assets/splash.jpg')}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <View style={styles.container}>
-        <Text style={styles.title}>📜🗡️ Sacred Scrolls of Aetherion 🗡️📜</Text>
-        <FlatList
-          data={scrolls}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.item}
-              onPress={() =>
-                navigation.navigate('ScrollDetail', { id: item.id })
-              }
-            >
-              <Text style={styles.itemText}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-    </ImageBackground>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.heading}>Sacred Scrolls</Text>
+      <Text style={styles.paragraph}>
+        Here you will find the wisdom of the Grove, the Codex of Aetherion, and
+        more…
+      </Text>
+      {/* Add additional scroll content here */}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  background
-::contentReference[oaicite:0]{index=0}
- 
+  container: {
+    flexGrow: 1,
+    backgroundColor: "rgba(30, 30, 46, 0.9)",
+    padding: 20
+  },
+  heading: {
+    fontSize: 24,
+    color: "#e0c0ff",
+    marginBottom: 12,
+    textAlign: "center"
+  },
+  paragraph: {
+    fontSize: 16,
+    color: "#fff",
+    lineHeight: 24
+  }
+});
