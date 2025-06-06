@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-// Use require(...) for gate.png
+
 export default function OthersGate() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
