@@ -16,8 +16,7 @@ export default function VaultScreen({ navigation }: any) {
 
   const handleUpload = async () => {
     try {
-      // For demo, hardcode userId = 1
-      await uploadMemory(1, content);
+      await uploadMemory(1, content); // replace 1 with real userId
       Alert.alert("Success", "Memory uploaded!");
       setContent("");
     } catch (err: any) {
