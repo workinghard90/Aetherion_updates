@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "jsx": "react-native",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "strict": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@screens/*": ["screens/*"],
+      "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"]
+    }
+  },
+  "include": [
+    "screens/**/*",
+    "components/**/*",
+    "utils/**/*",
+    "services/**/*",
+    "App.tsx",
+    "vite.config.ts",
+    "tailwind.config.ts"
+  ]
+}
