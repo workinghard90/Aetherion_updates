@@ -1,81 +1,59 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
-  ImageBackground,
-} from 'react-native';
+  ImageBackground
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function HomeScreen({ navigation }) {
+// Background image: place icon.png under frontend/assets/images/icon.png
+export default function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <ImageBackground
-      source={require('../assets/icon.jpg')}
+      source={require("../assets/images/icon.png")}
       style={styles.background}
       resizeMode="cover"
     >
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>⚝ Aetherion Welcomes You Sovereign ⚝</Text>
-
+      <View style={styles.container}>
+        <Text style={styles.title}>Welcome to Aetherion</Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Vault')}
+          onPress={() => navigation.navigate("Oracle")}
         >
-          <Text style={styles.buttonText}>Enter Vault</Text>
+          <Text style={styles.buttonText}>▶ Grove Oracle</Text>
         </TouchableOpacity>
-
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Scrolls')}
+          onPress={() => navigation.navigate("Vault")}
         >
-          <Text style={styles.buttonText}>Sacred Scrolls</Text>
+          <Text style={styles.buttonText}>🏺 Vault of Awackaning </Text>
         </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Oracle')}
-        >
-          <Text style={styles.buttonText}>Grove Oracle</Text>
-        </TouchableOpacity>
-      </ScrollView>
+      </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
+  background: { flex: 1 },
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
+    flex: 1,
+    backgroundColor: "rgba(30, 30, 46, 0.8)",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20
   },
-  title: {
-    fontSize: 28,
-    color: '#e0c0ff',
-    fontWeight: 'bold',
-    marginBottom: 30,
-    textAlign: 'center',
-  },
+  title: { fontSize: 28, color: "#e0c0ff", marginBottom: 30 },
   button: {
-    backgroundColor: '#8e44ad',
-    paddingVertical: 14,
-    paddingHorizontal: 40,
-    borderRadius: 10,
+    backgroundColor: "#8e44ad",
+    padding: 14,
+    borderRadius: 8,
     marginVertical: 10,
-    width: '80%',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 3 },
+    width: "80%",
+    alignItems: "center"
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+  buttonText: { color: "#fff", fontSize: 18, fontWeight: "bold" }
 });
