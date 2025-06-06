@@ -9,7 +9,6 @@ export default function ScrollsScreen() {
         Here you will find the wisdom of the Grove, the Codex of Aetherion, and
         more…
       </Text>
-      {/* Add additional scroll content here */}
     </ScrollView>
   );
 }
