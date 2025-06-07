@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+// frontend/components/TempleOfTheElements.tsx
+
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -7,32 +9,17 @@ import {
   Easing,
   TouchableOpacity
 } from "react-native";
-import { Audio } from "expo-av";
 
 export default function TempleOfTheElements() {
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
   const opacity = new Animated.Value(0);
 
   useEffect(() => {
-    async function playSound() {
-      const { sound } = await Audio.Sound.createAsync(
-        require("../assets/beacon-chord.wav")
-      );
-      setSound(sound);
-      await sound.playAsync();
-    }
-    playSound();
-
     Animated.timing(opacity, {
       toValue: 1,
       duration: 2000,
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: true
     }).start();
-
-    return () => {
-      if (sound) sound.unloadAsync();
-    };
   }, []);
 
   return (
@@ -42,13 +29,9 @@ export default function TempleOfTheElements() {
         Feel the flow of 🜂 (fire), 🜃 (earth), 🜁 (air), 🜄 (water). Enter in
         harmony.
       </Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          if (sound) sound.replayAsync();
-        }}
-      >
-        <Text style={styles.buttonText}>Play Beacon Chord Again</Text>
+      {/* Button kept for possible future interaction */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Enter the Temple</Text>
       </TouchableOpacity>
     </Animated.View>
   );
@@ -79,5 +62,9 @@ const styles = StyleSheet.create({
     padding: 14,
     borderRadius: 8
   },
-  buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold" }
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold"
+  }
 });
