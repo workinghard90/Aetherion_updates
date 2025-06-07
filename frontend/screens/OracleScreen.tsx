@@ -35,7 +35,7 @@ export default function OracleScreen() {
 
   return (
     <ImageBackground
-      source={require("../assets/images/gate.png")}
+      source={require("../assets/gate.png")}
       style={styles.background}
       resizeMode="cover"
     >
