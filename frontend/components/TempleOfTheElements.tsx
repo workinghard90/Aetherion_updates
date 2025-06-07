@@ -13,17 +13,16 @@ export default function TempleOfTheElements() {
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const opacity = new Animated.Value(0);
 
-  // Play the beacon-chord.wav on mount
   useEffect(() => {
     async function playSound() {
       const { sound } = await Audio.Sound.createAsync(
-        require("../assets/sounds/beacon-chord.wav")
+        require("../assets/beacon-chord.wav")
       );
       setSound(sound);
       await sound.playAsync();
     }
     playSound();
-    // fade‐in animation
+
     Animated.timing(opacity, {
       toValue: 1,
       duration: 2000,
