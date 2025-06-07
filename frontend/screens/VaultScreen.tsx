@@ -35,7 +35,7 @@ export default function VaultScreen({ navigation }: any) {
 
   return (
     <ImageBackground
-      source={require("../assets/images/splash.png")}
+      source={require("../assets/splash.png")}
       style={styles.background}
       resizeMode="cover"
     >
