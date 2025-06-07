@@ -13,7 +13,7 @@ export default function HomeScreen() {
 
   return (
     <ImageBackground
-      source={require("../assets/images/icon.png")}
+      source={require("../assets/icon.png")}
       style={styles.background}
       resizeMode="cover"
     >
