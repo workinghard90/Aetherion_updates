@@ -5,7 +5,7 @@ export default function OthersGate() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={require("../assets/images/gate.png")}
+        source={require("../assets/gate.png")}
         style={styles.image}
         resizeMode="cover"
       />
@@ -28,7 +28,7 @@ export default function OthersGate() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: "rgba(30,30,46,0.9)",
+    backgroundColor: "rgba(30, 30, 46, 0.9)",
     alignItems: "center"
   },
   image: {
